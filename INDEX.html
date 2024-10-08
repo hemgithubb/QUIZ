@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Quiz</title>
+    <style>
+      body {
+        height: 100vh;
+        background-color: rgb(80, 124, 138);
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Roboto', sans-serif;
+      }
+
+      #frame {
+        border: 3px solid #3d3d3d;
+        width: 90%;
+        max-width: 600px;
+        background-color: white;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        padding: 20px;
+        display: none;
+        transition: all 0.3s ease;
+      }
+
+      .option {
+        margin: 15px 0;
+        background-color: rgb(212, 214, 212);
+        border: 2px solid #3d3d3d;
+        border-radius: 8px;
+        text-align: left;
+        padding: 10px;
+        box-shadow: 1.5px 1.5px 6px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease;
+      }
+
+      .option:hover {
+        background-color: rgb(129, 217, 233);
+      }
+
+      label {
+        font-size: 20px;
+        margin-left: 10px;
+      }
+
+      .submitbtn,
+      .nextbtn {
+        margin: 20px;
+        padding: 10px 20px;
+        font-size: 18px;
+        background-color: rgb(86, 171, 197);
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .submitbtn:hover,
+      .nextbtn:hover {
+        background-color: rgb(6, 182, 252);
+      }
+
+      #question {
+        font-size: 24px;
+        margin: 20px 0;
+      }
+
+      input[type="radio"] {
+        margin-right: 10px;
+      }
+
+      #notice {
+        color: red;
+        margin-top: 10px;
+      }
+
+      .head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .timer {
+        display: flex;
+        align-items: center;
+        border: 2px solid #3d3d3d;
+        background-color: rgb(226, 223, 223);
+        padding: 5px;
+        border-radius: 5px;
+      }
+
+      #time {
+        padding: 0 10px;
+        background-color: rgb(114, 112, 112);
+        color: white;
+        border-radius: 3px;
+      }
+
+      #popup {
+        width: 90%;
+        max-width: 600px;
+        text-align: center;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      #welcome {
+        font-size: 26px;
+        margin-bottom: 20px;
+      }
+
+      select {
+        height: 35px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 5px;
+      }
+
+      #name {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      .diflevel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 15px 0;
+      }
+
+      #difp {
+        font-size: 20px;
+        margin-right: 10px;
+      }
+
+      @media (max-width: 600px) {
+        #question {
+          font-size: 20px;
+        }
+
+        .option label {
+          font-size: 16px;
+        }
+
+        .submitbtn,
+        .nextbtn {
+          width: 100%;
+          padding: 12px 0;
+          font-size: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="frame">
+      <div class="head">
+        <p id="count">Question No</p>
+        <span class="timer">
+          <p id="timeleft">Time Left</p>
+          <p id="time">20</p>
+        </span>
+      </div>
+      <h1 id="question">This is a question</h1>
+
+      <div class="option">
+        <input id="option1" type="radio" value="1" name="option" />
+        <label for="option1">Option 1</label>
+      </div>
+      <div class="option">
+        <input id="option2" type="radio" value="2" name="option" />
+        <label for="option2">Option 2</label>
+      </div>
+      <div class="option">
+        <input id="option3" type="radio" value="3" name="option" />
+        <label for="option3">Option 3</label>
+      </div>
+      <div class="option">
+        <input id="option4" type="radio" value="4" name="option" />
+        <label for="option4">Option 4</label>
+      </div>
+      <p id="notice"></p>
+      <button class="submitbtn" onclick="submit()">Submit</button>
+      <button class="nextbtn" onclick="next()">Next</button>
+    </div>
+
+    <div id="popup">
+      <p id="welcome">WELCOME TO THE QUIZ</p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque vero,
+        animi ipsum quibusdam ullam magnam minima veritatis consectetur
+        deserunt, facilis sequi quam excepturi modi tempore nihil tempora,
+        voluptate esse odit?
+      </p>
+      <input type="text" id="name" placeholder="Enter your name" />
+      <div class="diflevel">
+        <label for="difficulty" id="difp">Enter Difficulty Level</label>
+        <select name="difficulty" id="difficulty">
+          <option value="1">Easy</option>
+          <option value="2">Intermediate</option>
+          <option value="3">Hard</option>
+        </select>
+      </div>
+      <button id="start" onclick="start()">Start</button>
+      <p id="para"></p>
+    </div>
+
+    <script src="quiz.js"></script>
+  </body>
+</html>
